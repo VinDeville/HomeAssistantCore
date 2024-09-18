@@ -95,7 +95,6 @@ class TwitchSensor(SensorEntity):
 
         self._attr_extra_state_attributes = {
             ATTR_FOLLOWING: followers.total,
-            ATTR_VIEWS: self._channel.view_count,
         }
         if self._enable_user_auth:
             await self._async_add_user_attributes()
@@ -106,6 +105,7 @@ class TwitchSensor(SensorEntity):
             self._attr_extra_state_attributes[ATTR_GAME] = stream.game_name
             self._attr_extra_state_attributes[ATTR_TITLE] = stream.title
             self._attr_extra_state_attributes[ATTR_STARTED_AT] = stream.started_at
+            self._attr_extra_state_attributes[ATTR_VIEWS] = stream.viewer_count
             self._attr_entity_picture = stream.thumbnail_url
             if self._attr_entity_picture is not None:
                 self._attr_entity_picture = self._attr_entity_picture.format(
